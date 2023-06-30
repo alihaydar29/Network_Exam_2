@@ -1,0 +1,88 @@
+R1#show running-config 
+Building configuration...
+
+Current configuration : 848 bytes
+!
+version 12.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname R1
+!
+!
+!
+enable secret 5 $1$mERr$Du9fMrZ4kj/E065nIESvA0
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ ip address 10.10.10.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ ip address 10.10.10.5 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 28
+ log-adjacency-changes
+ network 10.10.10.0 0.0.0.3 area 100
+ network 10.10.10.4 0.0.0.3 area 100
+!
+ip classless
+ip route 192.168.0.0 255.255.0.0 10.10.10.2 
+!
+ip flow-export version 9
+!
+!
+!
+no cdp run
+!
+!
+!
+!
+!
+!
+line con 0
+ password 7 08204047
+ login
+!
+line aux 0
+!
+line vty 0 4
+ password 7 08324D49000B
+ login
+!
+!
+!
+end
